@@ -12,25 +12,23 @@ class Program
             
             win.Closed += (o, e) => win.Close();
             
-            
-
             Vector2f direction = new Vector2f(1, 1);
             float speed = 50f;
-
-
+            
             List<Ball> balls = new List<Ball>();
            balls.Add(new Ball());
 
             Clock clock = new Clock();
-           // bool isPressed = true;
-           // bool wasPressed = false;
-            
+            bool isPressed = true;
+            bool wasPressed = false;
 
+            int frameCount = 0;
             while (win.IsOpen)
             {
                 
                 float deltaTime = clock.Restart().AsSeconds();
                 win.DispatchEvents();
+                Console.WriteLine("new frame----------------------");
                 foreach (Ball ball in balls)
                 {
                     ball.Update((deltaTime));
@@ -38,6 +36,8 @@ class Program
                 }
                 win.Clear(new Color(30, 250, 200));
 
+                //Handle collsion
+                //currently the issue why balls spawn at same place.
                 for (int i = 0; i < balls.Count; i++)
                 {
                     for (int j = i + 1; j < balls.Count; j++)
@@ -54,19 +54,30 @@ class Program
                 
                 foreach (Ball ball in balls)
                 {
-                   
                     ball.Draw(win);
+                    
                 }
-                
-                if (Mouse.IsButtonPressed(Mouse.Button.Left))
+
+                wasPressed = isPressed;
+                isPressed = Mouse.IsButtonPressed(Mouse.Button.Left);
+                if (isPressed == true && wasPressed == false)
                 {
                     balls.Add((new Ball()));
+                    Console.WriteLine($"----------------------NEW BALL -----------------------------");
+                    //AddBall();
 
                 }
-                
-               
-                
-                
+
+                if (balls.Count == 2)
+                {
+                    frameCount++;
+                }
+
+                //if (frameCount > 7)
+                //{
+                //    break;
+                //}
+                    
                 win.Display();
                 
 
@@ -84,9 +95,17 @@ class Program
         private Vector2f direction = new Vector2f(1,1);
         private float speed = 100f;
 
+        private int ballnumber;
+
+        private static int counter = 0;
+
+        
+
 
         public Ball()
         {
+            counter++;
+            ballnumber = counter;
             shape = new CircleShape(radius: 30);
             shape.FillColor = Color.Red;
             shape.Origin = new Vector2f(30, 30);
@@ -99,11 +118,13 @@ class Program
             float Y = (rand.Next(0,2)* 2)- 1;
             direction = new Vector2f(X, Y);
             speed = rand.Next(30, 100);
+            
 
         }
         
         public void Update(float deltaTime)
         {
+            Console.WriteLine($"Position before update:{ballnumber}: {shape.Position}");
             shape.Position += direction * speed * deltaTime;
             if (shape.Position.X < 0) //Left side
             {
@@ -126,6 +147,7 @@ class Program
                 shape.Position = new Vector2f(shape.Position.X, 600);
                 direction.Y = -1;
             }
+            Console.WriteLine($"Position after update:{ballnumber}: {shape.Position}");
         }
 
         public void Draw(RenderWindow rw)

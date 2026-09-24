@@ -466,11 +466,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\b26felja\\RiderProjects\\Workshop2\\Workshop2\\Workshop2.csproj",
+      "projectUniqueName": "C:\\Users\\b26felja\\RiderProjects\\Workshop-2\\Workshop2.csproj",
       "projectName": "Workshop2",
-      "projectPath": "C:\\Users\\b26felja\\RiderProjects\\Workshop2\\Workshop2\\Workshop2.csproj",
+      "projectPath": "C:\\Users\\b26felja\\RiderProjects\\Workshop-2\\Workshop2.csproj",
       "packagesPath": "C:\\Users\\b26felja\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\b26felja\\RiderProjects\\Workshop2\\Workshop2\\obj\\",
+      "outputPath": "C:\\Users\\b26felja\\RiderProjects\\Workshop-2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\b26felja\\AppData\\Roaming\\NuGet\\NuGet.Config"
